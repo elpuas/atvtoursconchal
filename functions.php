@@ -46,3 +46,21 @@ function add_slug_body_class( $classes ) {
 function atvtours_custom_msg() {
 echo "<p> Didn’t find what you were looking for?  Don’t worry, we have many other tours not listed here, like our Lobster ATV tour and combo tours. Just contact our team and we will create the perfect vacation tour for you, your family and your friends.</p>";
 }
+
+/**
+ * Remove existing tabs from single product pages.
+ */
+function remove_woocommerce_product_tabs( $tabs ) {
+	unset( $tabs['description'] );
+	unset( $tabs['reviews'] );
+	unset( $tabs['additional_information'] );
+	return $tabs;
+}
+add_filter( 'woocommerce_product_tabs', 'remove_woocommerce_product_tabs', 98 );
+
+/**
+ * Hook in each tabs callback function after single content.
+ */
+add_action( 'woocommerce_after_single_product_summary', 'woocommerce_product_description_tab' );
+add_action( 'woocommerce_after_single_product_summary', 'woocommerce_product_additional_information_tab' );
+add_action( 'woocommerce_after_single_product_summary', 'comments_template' );
