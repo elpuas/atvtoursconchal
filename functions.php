@@ -36,3 +36,13 @@ function add_slug_body_class( $classes ) {
 	return $classes;
 	}
 	add_filter( 'body_class', 'add_slug_body_class' );
+
+	/*
+	 WooCommerce
+	*/ 
+
+	add_action( 'woocommerce_after_shop_loop', 'atvtours_custom_msg', 15 );
+ 
+function atvtours_custom_msg() {
+echo "<p> Didn’t find what you were looking for?  Don’t worry, we have many other tours not listed here, like our Lobster ATV tour and combo tours. Just contact our team and we will create the perfect vacation tour for you, your family and your friends.</p>";
+}
