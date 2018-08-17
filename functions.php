@@ -41,7 +41,7 @@ function add_slug_body_class( $classes ) {
 	 WooCommerce
 	*/ 
 
-	add_action( 'woocommerce_after_shop_loop', 'atvtours_custom_msg', 15 );
+	add_action( 'woocommerce_after_shop_loop', 'atvtours_custom_msg', 9 );
  
 function atvtours_custom_msg() {
 echo "<p> Didn’t find what you were looking for?  Don’t worry, we have many other tours not listed here, like our Lobster ATV tour and combo tours. Just contact our team and we will create the perfect vacation tour for you, your family and your friends.</p>";
