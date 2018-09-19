@@ -76,23 +76,23 @@ add_action( 'woocommerce_after_single_product_summary', 'woocommerce_product_des
  * Remove Price Range
  */
 
-function wc_varb_price_range( $wcv_price, $product ) {
+function atv_price_range( $atv_price, $product ) {
  
-    $prefix = sprintf('%s: ', __( ' ', 'wcvp_range' ) );
+    // prefix = sprintf('%s: ', __( ' ', 'atvp_range' ) );
  
-    $wcv_reg_min_price = $product->get_variation_regular_price( 'min', true );
-    $wcv_min_sale_price    = $product->get_variation_sale_price( 'min', true );
-    $wcv_max_price = $product->get_variation_price( 'max', true );
-    $wcv_min_price = $product->get_variation_price( 'min', true );
+    $atv_reg_min_price = $product->get_variation_regular_price( 'min', true );
+    $atv_min_sale_price    = $product->get_variation_sale_price( 'min', true );
+    $atv_max_price = $product->get_variation_price( 'max', true );
+    $atv_min_price = $product->get_variation_price( 'min', true );
  
-    $wcv_price = ( $wcv_min_sale_price == $wcv_reg_min_price ) ?
-        wc_price( $wcv_reg_min_price ) :
-        '<del>' . wc_price( $wcv_reg_min_price ) . '</del>' . '<ins>' . wc_price( $wcv_min_sale_price ) . '</ins>';
+    $atv_price = ( $atv_min_sale_price == $atv_reg_min_price ) ?
+        wc_price( $atv_reg_min_price ) :
+        '<del>' . wc_price( $atv_reg_min_price ) . '</del>' . '<ins>' . wc_price( $atv_min_sale_price ) . '</ins>';
  
-    return ( $wcv_min_price == $wcv_max_price ) ?
-        $wcv_price :
-        sprintf('%s%s', $prefix, $wcv_price);
+    return ( $atv_min_price == $atv_max_price ) ?
+        $atv_price :
+        sprintf('%s%s', $atv_price);
 }
  
-add_filter( 'woocommerce_variable_sale_price_html', 'wc_varb_price_range', 10, 2 );
-add_filter( 'woocommerce_variable_price_html', 'wc_varb_price_range', 10, 2 );
+add_filter( 'woocommerce_variable_sale_price_html', 'atv_price_range', 10, 2 );
+add_filter( 'woocommerce_variable_price_html', 'atv_price_range', 10, 2 );
