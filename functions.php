@@ -78,7 +78,7 @@ add_action( 'woocommerce_after_single_product_summary', 'woocommerce_product_des
 
 function wc_varb_price_range( $wcv_price, $product ) {
  
-    $prefix = sprintf('%s: ', __('From', 'wcvp_range'));
+    $prefix = sprintf('%s: ', __( ' ', 'wcvp_range' ) );
  
     $wcv_reg_min_price = $product->get_variation_regular_price( 'min', true );
     $wcv_min_sale_price    = $product->get_variation_sale_price( 'min', true );
