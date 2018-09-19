@@ -48,7 +48,7 @@ function add_slug_body_class( $classes ) {
 	add_action( 'woocommerce_after_shop_loop', 'atvtours_custom_msg', 9 );
  
 function atvtours_custom_msg() {
-echo "<h3 style='margin:1rem auto 50px; max-width:80vw;'> Didn’t find what you were looking for?  Don’t worry, we have many other tours not listed here, like our Lobster ATV tour and combo tours. Just contact our team and we will create the perfect vacation tour for you, your family and your friends.</h3><br/>";
+echo "<h3 style='margin:1rem auto cd pu	50px; max-width:80vw;'> Didn’t find what you were looking for?  Don’t worry, we have many other tours not listed here, like our Lobster ATV tour and combo tours. Just contact our team and we will create the perfect vacation tour for you, your family and your friends.</h3><br/>";
 }
 
 /**
@@ -70,3 +70,29 @@ add_filter( 'woocommerce_product_tabs', 'remove_woocommerce_product_tabs', 98 );
 add_action( 'woocommerce_after_single_product_summary', 'woocommerce_product_description_tab' );
 // add_action( 'woocommerce_after_single_product_summary', 'woocommerce_product_additional_information_tab' );
 // add_action( 'woocommerce_after_single_product_summary', 'comments_template' );
+
+
+/**
+ * Remove Price Range
+ */
+
+function wc_varb_price_range( $wcv_price, $product ) {
+ 
+    $prefix = sprintf('%s: ', __('From', 'wcvp_range'));
+ 
+    $wcv_reg_min_price = $product->get_variation_regular_price( 'min', true );
+    $wcv_min_sale_price    = $product->get_variation_sale_price( 'min', true );
+    $wcv_max_price = $product->get_variation_price( 'max', true );
+    $wcv_min_price = $product->get_variation_price( 'min', true );
+ 
+    $wcv_price = ( $wcv_min_sale_price == $wcv_reg_min_price ) ?
+        wc_price( $wcv_reg_min_price ) :
+        '<del>' . wc_price( $wcv_reg_min_price ) . '</del>' . '<ins>' . wc_price( $wcv_min_sale_price ) . '</ins>';
+ 
+    return ( $wcv_min_price == $wcv_max_price ) ?
+        $wcv_price :
+        sprintf('%s%s', $prefix, $wcv_price);
+}
+ 
+add_filter( 'woocommerce_variable_sale_price_html', 'wc_varb_price_range', 10, 2 );
+add_filter( 'woocommerce_variable_price_html', 'wc_varb_price_range', 10, 2 );
