@@ -134,3 +134,13 @@ function populate_posts( $form ) {
  
     return $form;
 }
+
+/*
+ Add Font Awesome
+*/
+
+function atv_fontawesome() {
+    echo '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">';
+}
+// Add hook for front-end <head></head>
+add_action( 'wp_head', 'atv_fontawesome' );
